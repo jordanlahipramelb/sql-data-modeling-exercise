@@ -21,7 +21,7 @@ CREATE TABLE users (
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
-    user_id TEXT REFERENCES users ON DELETE SET NULL,
+    user_id INTEGER REFERENCES users ON DELETE SET NULL,
     title TEXT,
     body TEXT NOT NULL,
     category TEXT NOT NULL,
