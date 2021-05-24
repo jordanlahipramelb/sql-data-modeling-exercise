@@ -11,8 +11,7 @@ CREATE TABLE teams (
 CREATE TABLE players (
     id SERIAL PRIMARY KEY,
     first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
-    goals_scored INTEGER
+    last_name TEXT NOT NULL
 );
 
 CREATE TABLE players_teams (
@@ -23,9 +22,22 @@ CREATE TABLE players_teams (
 
 CREATE TABLE matches (
     id SERIAL PRIMARY KEY,
-    team_1 INTEGER REFERENCES teams NOT NULL,
-    team_2 INTEGER REFERENCES teams NOT NULL,
-    ref TEXT NOT NULL
+    home_team_id INTEGER REFERENCES teams NOT NULL,
+    away_team_id INTEGER REFERENCES teams NOT NULL,
+    winner_id INTEGER REFERENCES teams 
+);
+
+CREATE TABLE goals_each_game (
+    id SERIAL PRIMARY KEY,
+    match_id INTEGER REFERENCES matches,
+    player_id INTEGER REFERENCES players
+);
+
+CREATE TABLE referees (
+    id SERIAL PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    match_id INTEGER REFERENCES matches
 );
 
 CREATE TABLE league_dates (
